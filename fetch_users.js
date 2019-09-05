@@ -1,7 +1,6 @@
 /* Fetch 100 streamers by views*/
 
 const https = require('https')
-var ircClient = require('node-irc');
 const fs = require('fs');
 
 const oauth = ''
