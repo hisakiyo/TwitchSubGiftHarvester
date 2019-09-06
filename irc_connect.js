@@ -1,6 +1,6 @@
 var irc = require("irc");
 const fs = require("fs");
-var users = fs.readFileSync("user.txt").toString();
+var users = fs.readFileSync("user.json").toString();
 users = JSON.parse(users)
 console.log(users)
 
