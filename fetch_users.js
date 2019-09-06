@@ -1,57 +1,30 @@
-/* Fetch 100 streamers by views*/
+const fetch = require('node-fetch')
+const fs = require('fs')
 
-const https = require('https')
-const fs = require('fs');
+const userFile = 'user.json'
+const save = async newUsers => {
+  const savedUsers = JSON.parse((await fs.promises.readFile(userFile, 'utf8')) || '[]')
+  const allUsers = [...savedUsers, ...newUsers]
+  console.log(`Usernames count: ${allUsers.length}\n`)
+  return fs.promises.writeFile(userFile, JSON.stringify(allUsers))
+}
 
-const oauth = ''
+const setup = async () => {
+  let cursor = null
+  // loop through first 1000 members
+  for (let i = 0; i < 10; i++) {
+    console.log(`Cursor: ${cursor}`)
 
-const options = {
-  hostname: 'api.twitch.tv',
-  port: 443,
-  path: '/kraken/streams/?limit=100',
-  method: 'GET',
-  headers: {
-    'Accept' : 'application/vnd.twitchtv.v5+json',
-    'Client-ID' : 'zsujit5vv4gtew8k6snn8xr0pb7q9a'
+    const users = await fetch(`https://api.twitch.tv/helix/streams?first=100${cursor ? `&after=${cursor}` : ''}`, {
+      headers: {
+        'Client-ID': 'zsujit5vv4gtew8k6snn8xr0pb7q9a'
+      }
+    }).then(res => res.json())
+
+    // Save current cursor 100 usernames
+    await save(users.data.map(aUser => aUser.user_name))
+    cursor = users.pagination.cursor
   }
-};
+}
 
-
-const req = https.request(options, (res) => {
-  let data = '';
-  res.on('data', (chunk) => {
-        data+=chunk;
-  });
-  res.on('end', () => {
-
-
-fs.writeFile('user.txt', '[', function (err) {
-  if (err) throw err;
-});
-
-        var dparse = JSON.parse(data)
-        for(var i=0;i<100;i++){
-                var user = dparse.streams[i].channel.name
-		if(i<99){
-		fs.appendFile("user.txt", '\"#' + user+ '\"' + ',', function(err) {
-    			if(err) {
-        			return console.log(err);
-	    		}
-		}); 
-		} else {
-		fs.appendFile("user.txt", '\"#' + user+ '\"' + ']', function(err) {
-                        if(err) {
-                                return console.log(err);
-                        }
-                });
-		console.log("Fichier sauvegardé");
-	        }
-	}
-  });
-});
-
-req.on('error', (e) => {
-  console.error(`problem with request: ${e.message}`);
-});
-
-req.end();
+setup()
