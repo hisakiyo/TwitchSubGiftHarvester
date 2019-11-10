@@ -3,8 +3,9 @@ Bot that allows you to harvest twitch subs
 
 ## Usage (Ubuntu)
 ```
-sudo apt-get install curl
+sudo apt install curl
 curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+sudo apt install nodejs git
 git clone https://github.com/hisakiyo/TwitchSubGiftHarvester.git
 cd TwitchSubGiftHarvester
 npm install node-fetch irc
