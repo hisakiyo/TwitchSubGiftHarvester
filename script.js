@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const fs = require('fs')
-var irc = require('irc');
+const irc = require('irc');
 const userFile = 'user.json' // file where usernames will be registered
 const language = 'fr' // fr-en-es ...
 const oauthTwitch = '' // oauth:xxxxxxxxxxxxxxxxxxxxxxxx
