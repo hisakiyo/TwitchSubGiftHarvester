@@ -5,7 +5,7 @@ const userFile = 'user.json' // file where usernames will be registered
 const language = 'fr' // fr-en-es ...
 const oauthTwitch = '' // oauth:xxxxxxxxxxxxxxxxxxxxxxxx
 const userTwitch = '' // twitch username
-const countChannel = 100 // number of channel
+const countChannel = 100 // number of channel (100,200,300...1000)
 var minutes = 15, interval = minutes * 60 * 1000 // time between updates
 
 var config = {
