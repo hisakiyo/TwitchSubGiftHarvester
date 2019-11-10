@@ -6,7 +6,7 @@ const language = 'fr' // fr-en-es ...
 const oauthTwitch = '' // oauth:xxxxxxxxxxxxxxxxxxxxxxxx
 const userTwitch = '' // twitch username
 const countChannel = 100 // number of channel
-var minutes = 15, interval = minutes * 1000;
+var minutes = 15, interval = minutes * 60 * 1000; // time between updates
 
 var config = {
     channels: "",
