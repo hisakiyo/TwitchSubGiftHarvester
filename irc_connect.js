@@ -10,7 +10,8 @@ var config = {
         server: "irc.chat.twitch.tv",
         oauth: "oauth:",
         botName: "hisakiyo_",
-        autoRejoin: true,                                                                                                                                                                                                                            autoConnect: true,
+        autoRejoin: false,
+        autoConnect: true,
         floodProtection: true,
         floodProtectionDelay: 3000
 };
