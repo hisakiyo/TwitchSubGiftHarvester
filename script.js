@@ -6,7 +6,7 @@ const language = 'fr' // fr-en-es ...
 const oauthTwitch = '' // oauth:xxxxxxxxxxxxxxxxxxxxxxxx
 const userTwitch = '' // twitch username
 const countChannel = 100 // number of channel
-var minutes = 15, interval = minutes * 60 * 1000; // time between updates
+var minutes = 15, interval = minutes * 60 * 1000 // time between updates
 
 var config = {
     channels: "",
@@ -17,13 +17,15 @@ var config = {
     autoConnect: true,
     floodProtection: true,
     floodProtectionDelay: 3000
-};
+}
+
 const save = async newUsers => {
     const savedUsers = JSON.parse((await fs.promises.readFile(userFile, 'utf8')) || '[]')
     const allUsers = [...savedUsers, ...newUsers]
     console.log(`Usernames count: ${allUsers.length}\n`)
     return fs.promises.writeFile(userFile, JSON.stringify(allUsers))
 }
+
 async function fetch_users(){
         let cursor = null
         fs.writeFile(userFile, '', function(){console.log('File is now empty.')})
@@ -38,7 +40,7 @@ async function fetch_users(){
             cursor = users.pagination.cursor
         }
         return new Promise((resolve) => { resolve()})
-};
+}
 
 function join(channel, nick, msgobj){
         if (nick.toLowerCase() == config.botName.toLowerCase())
@@ -57,7 +59,7 @@ function connect_irc(){
     botClient = new irc.Client(config.server, config.botName, {
         channels: config.channels,
         password: config.oauth
-    });
+    })
     botClient.addListener("join", join)
     botClient.addListener("error", err)
 }
@@ -66,6 +68,6 @@ setInterval(function x() {
     fetch_users().then(function() {
         connect_irc()
     })
-    return x;
-}(), interval);
+    return x
+}(), interval)
 
