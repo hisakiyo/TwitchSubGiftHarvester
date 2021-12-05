@@ -1,0 +1,16 @@
+{
+    "name": "twitchsubgiftharvester",
+    "version": "1.0.0",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node main.js"
+    },
+    "author": "hisakiyo",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "irc": "^0.5.2",
+        "node-fetch": "^2.6.1"
+    }
+}

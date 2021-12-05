@@ -65,3 +65,4 @@ function connect_irc(){
 }
 
 connect_irc()
+console.log('run...')
